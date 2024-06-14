@@ -74,7 +74,7 @@ public class ExpenseIntegrationTests {
     }
 
     @Test
-    public void display_total_amount_per_week() throws ClassNotFoundException {
+    public void display_total_amount_per_week() {
         HttpEntity request = new HttpEntity<>(headers);
         ResponseEntity<List> response = restTemplate.exchange(endpointUrl + "/totalAmountPerWeek/2024", HttpMethod.GET, request, List.class);
 

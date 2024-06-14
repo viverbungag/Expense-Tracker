@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/expenses")
+@RequestMapping("api/v1/expenses")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class ExpenseController {
 
