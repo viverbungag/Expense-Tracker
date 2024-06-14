@@ -7,7 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Entity(name = "expense")
+@Entity
 @ToString
 @NoArgsConstructor
 @RequiredArgsConstructor

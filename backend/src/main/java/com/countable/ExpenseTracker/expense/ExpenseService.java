@@ -7,5 +7,6 @@ import java.util.Collection;
 interface ExpenseService {
 
     Collection<Expense> getAllExpenses();
+    Collection<Expense> getAllExpenses(String searchDescription);
     void createExpense(CreateExpenseDto createExpenseDto);
 }

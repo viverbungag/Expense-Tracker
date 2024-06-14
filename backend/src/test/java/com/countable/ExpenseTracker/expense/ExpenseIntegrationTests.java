@@ -37,7 +37,7 @@ public class ExpenseIntegrationTests {
     }
 
     @Test
-    public void displayAllExpenses() {
+    public void display_all_expenses() {
         HttpEntity request = new HttpEntity<>(headers);
         ResponseEntity<List> response = restTemplate.exchange(endpointUrl, HttpMethod.GET, request, List.class);
 
@@ -47,7 +47,7 @@ public class ExpenseIntegrationTests {
     }
 
     @Test
-    public void createExpense() {
+    public void create_expense() {
         CreateExpenseDto createExpenseDto = new CreateExpenseDto("New Expense", LocalDate.parse("2024-06-14"), 100F);
         HttpEntity<CreateExpenseDto> request = new HttpEntity<>(createExpenseDto, headers);
         ResponseEntity<Void> response = restTemplate.exchange(endpointUrl, HttpMethod.POST, request, Void.class);
@@ -58,5 +58,15 @@ public class ExpenseIntegrationTests {
         ResponseEntity<List> responseGet = restTemplate.exchange(endpointUrl, HttpMethod.GET, requestGet, List.class);
         List<Expense> expenses = responseGet.getBody();
         assertThat(expenses.size()).isEqualTo(4);
+    }
+
+    @Test
+    public void display_all_expenses_with_description_search_filter() {
+        HttpEntity request = new HttpEntity<>(headers);
+        ResponseEntity<List> response = restTemplate.exchange(endpointUrl + "?searchDescription=cof", HttpMethod.GET, request, List.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        List<Expense> expenses = response.getBody();
+        assertThat(expenses.size()).isEqualTo(2);
     }
 }

@@ -15,7 +15,11 @@ public class ExpenseController {
     private final ExpenseService expenseService;
 
     @GetMapping
-    public Collection<Expense> getAllExpenses(){
+    public Collection<Expense> getAllExpenses(@RequestParam("searchDescription") String searchDescription){
+        if (searchDescription != null){
+            return expenseService.getAllExpenses(searchDescription);
+        }
+
         return expenseService.getAllExpenses();
     }
 
