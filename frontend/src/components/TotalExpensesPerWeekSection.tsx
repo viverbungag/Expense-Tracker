@@ -58,7 +58,7 @@ const TotalExpensesPerWeekSection = () => {
           onClick={calculateExpenseButtonOnClick}
           className="btn btn-active w-fit"
         >
-          Calculate Expense
+          Calculate weekly expenses for the selected year
         </button>
       </div>
       <div className="flex justify-center">

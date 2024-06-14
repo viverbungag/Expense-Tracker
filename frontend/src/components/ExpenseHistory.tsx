@@ -19,8 +19,9 @@ const ExpenseHistory = () => {
   const expenses = expensesQuery.data;
 
   return (
-    <section className="flex items-center justify-center">
-      <div className="w-[50rem] flex flex-col gap-2">
+    <section className="flex flex-col items-center justify-center">
+      <h3 className="text-xl font-bold text-center">Expense History</h3>
+      <div className="w-[50rem] flex flex-col gap-2 mt-12">
         <label className="input input-bordered flex items-center gap-2 w-[20rem] sm:self-end self-center">
           <input
             type="text"

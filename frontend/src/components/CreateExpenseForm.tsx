@@ -54,10 +54,11 @@ const CreateExpenseForm = () => {
   };
 
   return (
-    <section className="flex items-center justify-center">
+    <section className="flex flex-col items-center justify-center">
+      <h3 className="text-xl font-bold text-center">Add your expense here</h3>
       <form
         onSubmit={createExpenseSubmitForm}
-        className="flex flex-col gap-4 w-[40rem] items-center"
+        className="flex flex-col gap-4 w-[40rem] items-center mt-12"
       >
         <input
           type="text"
