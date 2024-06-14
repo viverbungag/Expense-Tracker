@@ -1,6 +1,7 @@
 package com.countable.ExpenseTracker.expense;
 
 import com.countable.ExpenseTracker.expense.dto.CreateExpenseDto;
+import com.countable.ExpenseTracker.expense.dto.TotalPerWeekExpenseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,5 +28,10 @@ public class ExpenseController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createExpense(@RequestBody CreateExpenseDto createExpenseDto){
         expenseService.createExpense(createExpenseDto);
+    }
+
+    @GetMapping("/totalAmountPerWeek/{year}")
+    public Collection<TotalPerWeekExpenseDto> getTotalAmountPerWeek(@PathVariable int year){
+        return expenseService.getTotalAmountPerWeek(year);
     }
 }
