@@ -1,10 +1,11 @@
 package com.countable.ExpenseTracker.expense;
 
 
+import com.countable.ExpenseTracker.expense.dto.CreateExpenseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity(name = "expense")
 @ToString
@@ -25,10 +26,14 @@ public class Expense {
     @Column(name = "date")
     @Setter
     @NonNull
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "amount")
     @Setter
     @NonNull
     private Float amount;
+
+    public static Expense from(CreateExpenseDto createExpenseDto) {
+        return new Expense(createExpenseDto.description(), createExpenseDto.date(), createExpenseDto.amount());
+    }
 }
