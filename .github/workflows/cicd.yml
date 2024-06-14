@@ -37,4 +37,5 @@ jobs:
       - name: Stop Docker Container
         run: docker rm -f countable-backend
       - name: Run Docker Container
-        run: docker run -d -p 8080:8080 --name countable-backend ${{secrets.DOCKER_USERNAME}}/countable-springboot-backend:latest
+        working-directory: ./backend
+        run: docker compose -p countable-backend up -d
