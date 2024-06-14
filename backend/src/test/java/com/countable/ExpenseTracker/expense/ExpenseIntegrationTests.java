@@ -36,13 +36,13 @@ public class ExpenseIntegrationTests {
     @BeforeEach
     public void setup() {
         headers = new HttpHeaders();
-        endpointUrl = "http://localhost:" + port + "/expenses";
+        endpointUrl = "http://localhost:" + port + "/api/v1/expenses";
     }
 
     @Test
     public void display_all_expenses() {
         HttpEntity request = new HttpEntity<>(headers);
-        ResponseEntity<List> response = restTemplate.exchange(endpointUrl, HttpMethod.GET, request, List.class);
+        ResponseEntity<List> response = restTemplate.exchange(endpointUrl + "?searchDescription=", HttpMethod.GET, request, List.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Expense> expenses = response.getBody();
@@ -58,7 +58,7 @@ public class ExpenseIntegrationTests {
 
         // Verify that the new expense is added
         HttpEntity requestGet = new HttpEntity<>(headers);
-        ResponseEntity<List> responseGet = restTemplate.exchange(endpointUrl, HttpMethod.GET, requestGet, List.class);
+        ResponseEntity<List> responseGet = restTemplate.exchange(endpointUrl + "?searchDescription=", HttpMethod.GET, requestGet, List.class);
         List<Expense> expenses = responseGet.getBody();
         assertThat(expenses.size()).isEqualTo(4);
     }

@@ -6,10 +6,40 @@ services:
       - POSTGRES_DB=db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
     volumes:
       - db-data:/var/lib/postgresql
+    networks:
+      - spring-postgresql
     ports:
         - "5432:5432"
-
+  backend:
+    image: countable/backend
+    container_name: countable-backend
+    environment:
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db/db
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
+      interval: 10s
+      retries: 5
+      start_period: 30s
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - spring-postgresql
 volumes:
   db-data: {}
+networks:
+  spring-postgresql: {}
