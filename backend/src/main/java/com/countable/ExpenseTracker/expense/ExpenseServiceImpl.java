@@ -39,6 +39,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     public Collection<TotalPerWeekExpenseDto> getTotalAmountPerWeek(int year) {
         Collection<TotalPerWeekExpenseDto> totalPerWeekExpenseDtos = new ArrayList<>();
 
+        // Need to do this because the query returns an Object[] and we need to convert it to a DTO. The Spring Data JPA cannot automatically convert to an entity that is outside of its scope
         for (Object[] objects : expenseRepository.getTotalAmountPerWeek(year)) {
             LocalDate startDate = LocalDate.parse((String) objects[0]);
             LocalDate endDate = LocalDate.parse((String) objects[1]);

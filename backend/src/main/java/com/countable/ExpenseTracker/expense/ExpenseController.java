@@ -38,6 +38,7 @@ public class ExpenseController {
 
     @GetMapping("/years")
     public Collection<Integer> getAllYears(){
+        // This endpoint is used by the frontend so the user can select a year to view the expenses
         return expenseService.getAllYears();
     }
 }
