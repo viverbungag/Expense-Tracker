@@ -2,6 +2,9 @@ package com.countable.ExpenseTracker.expense;
 
 
 import com.countable.ExpenseTracker.expense.dto.CreateExpenseDto;
+import com.countable.ExpenseTracker.expense.dto.TotalPerWeekExpenseDto;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +71,16 @@ public class ExpenseIntegrationTests {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Expense> expenses = response.getBody();
         assertThat(expenses.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void display_total_amount_per_week() throws ClassNotFoundException {
+        HttpEntity request = new HttpEntity<>(headers);
+        ResponseEntity<List> response = restTemplate.exchange(endpointUrl + "/totalAmountPerWeek/2024", HttpMethod.GET, request, List.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        List<Object> totalPerWeekExpenseDtos = response.getBody();
+        assertThat(totalPerWeekExpenseDtos.size()).isEqualTo(1);
     }
 }
