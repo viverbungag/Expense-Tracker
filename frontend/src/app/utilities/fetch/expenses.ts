@@ -15,7 +15,24 @@ export const fetchAllExpenses = async (
       'Access-Control-Allow-Origin': backendUrl,
     },
   });
-
-  // const data = await response.json();
   return response.data;
+};
+
+export const createExpense = async (
+  description: string,
+  date: string,
+  amount: number
+) => {
+  await axios({
+    method: 'POST',
+    url: `${backendUrl}/api/v1/expenses`,
+    data: {
+      description,
+      date,
+      amount,
+    },
+    headers: {
+      'Access-Control-Allow-Origin': backendUrl,
+    },
+  });
 };

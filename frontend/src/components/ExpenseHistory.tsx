@@ -1,6 +1,7 @@
 'use client';
 
 import { fetchAllExpenses } from '@/app/utilities/fetch/expenses';
+import moneyFormatter from '@/app/utilities/fetch/moneyFormatter';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
@@ -47,7 +48,7 @@ const ExpenseHistory = () => {
             />
           </svg>
         </label>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto h-[30rem]">
           <table className="table">
             <thead>
               <tr>
@@ -63,7 +64,7 @@ const ExpenseHistory = () => {
                   <th>{expense.id}</th>
                   <td>{expense.description}</td>
                   <td>{expense.date}</td>
-                  <td>Php. {expense.amount}</td>
+                  <td>{moneyFormatter(Number(expense.amount))}</td>
                 </tr>
               ))}
             </tbody>
