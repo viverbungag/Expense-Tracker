@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +49,10 @@ public class ExpenseServiceImpl implements ExpenseService {
         }
 
         return totalPerWeekExpenseDtos;
+    }
+
+    @Override
+    public List<Integer> getAllYears() {
+        return expenseRepository.getAllYears();
     }
 }

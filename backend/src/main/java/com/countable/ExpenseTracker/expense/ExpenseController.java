@@ -35,4 +35,9 @@ public class ExpenseController {
     public Collection<TotalPerWeekExpenseDto> getTotalAmountPerWeek(@PathVariable int year){
         return expenseService.getTotalAmountPerWeek(year);
     }
+
+    @GetMapping("/years")
+    public Collection<Integer> getAllYears(){
+        return expenseService.getAllYears();
+    }
 }

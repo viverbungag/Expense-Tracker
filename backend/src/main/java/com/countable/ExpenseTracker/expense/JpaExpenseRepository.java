@@ -24,4 +24,8 @@ public interface JpaExpenseRepository extends JpaRepository<Expense, Long>{
             ORDER BY start_date;
             """, nativeQuery = true)
     List<Object[]> getTotalAmountPerWeek(int year);
+
+    //get all years
+    @Query(value = "SELECT DISTINCT EXTRACT(YEAR FROM date) FROM expense ORDER BY EXTRACT(YEAR FROM date) DESC", nativeQuery = true)
+    List<Integer> getAllYears();
 }
