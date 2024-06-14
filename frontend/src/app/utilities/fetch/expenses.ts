@@ -36,3 +36,27 @@ export const createExpense = async (
     },
   });
 };
+
+export const fetchAllExpenseYears = async (): Promise<number[]> => {
+  const response = await axios({
+    method: 'GET',
+    url: `${backendUrl}/api/v1/expenses/years`,
+    headers: {
+      'Access-Control-Allow-Origin': backendUrl,
+    },
+  });
+  return response.data;
+};
+
+export const fetchTotalExpensesPerWeek = async (
+  year: Number
+): Promise<TotalPerWeekExpenseDto[]> => {
+  const response = await axios({
+    method: 'GET',
+    url: `${backendUrl}/api/v1/expenses/totalAmountPerWeek/${year}`,
+    headers: {
+      'Access-Control-Allow-Origin': backendUrl,
+    },
+  });
+  return response.data;
+};

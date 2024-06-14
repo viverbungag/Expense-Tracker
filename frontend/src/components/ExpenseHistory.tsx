@@ -3,6 +3,7 @@
 import { fetchAllExpenses } from '@/app/utilities/fetch/expenses';
 import moneyFormatter from '@/app/utilities/fetch/moneyFormatter';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import React, { useState } from 'react';
 
 const ExpenseHistory = () => {
@@ -20,7 +21,7 @@ const ExpenseHistory = () => {
   return (
     <section className="flex items-center justify-center">
       <div className="w-[50rem] flex flex-col gap-2">
-        <label className="input input-bordered flex items-center gap-2 w-[20rem] self-end">
+        <label className="input input-bordered flex items-center gap-2 w-[20rem] sm:self-end self-center">
           <input
             type="text"
             className="grow"
@@ -48,7 +49,7 @@ const ExpenseHistory = () => {
             />
           </svg>
         </label>
-        <div className="overflow-x-auto h-[30rem]">
+        <div className="overflow-x-auto h-[20rem]">
           <table className="table">
             <thead>
               <tr>
@@ -63,7 +64,7 @@ const ExpenseHistory = () => {
                 <tr key={expense.id}>
                   <th>{expense.id}</th>
                   <td>{expense.description}</td>
-                  <td>{expense.date}</td>
+                  <td>{dayjs(String(expense.date)).format('MMM DD, YYYY')}</td>
                   <td>{moneyFormatter(Number(expense.amount))}</td>
                 </tr>
               ))}

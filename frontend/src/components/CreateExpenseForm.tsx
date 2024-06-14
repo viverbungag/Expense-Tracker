@@ -38,6 +38,9 @@ const CreateExpenseForm = () => {
       await queryClient.invalidateQueries({
         queryKey: ['expenses'],
       });
+      await queryClient.invalidateQueries({
+        queryKey: ['years'],
+      });
       toast.success('Expense added successfully');
     },
     onError: () => {
@@ -51,7 +54,7 @@ const CreateExpenseForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <section className="flex items-center justify-center">
       <form
         onSubmit={createExpenseSubmitForm}
         className="flex flex-col gap-4 w-[40rem] items-center"
@@ -87,7 +90,7 @@ const CreateExpenseForm = () => {
           Add Expense
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 
