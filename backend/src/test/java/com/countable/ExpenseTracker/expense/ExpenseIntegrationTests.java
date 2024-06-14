@@ -1,6 +1,7 @@
 package com.countable.ExpenseTracker.expense;
 
 
+import com.countable.ExpenseTracker.expense.dto.CreateExpenseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.jdbc.Sql;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,5 +44,19 @@ public class ExpenseIntegrationTests {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Expense> expenses = response.getBody();
         assertThat(expenses.size()).isEqualTo(3);
+    }
+
+    @Test
+    public void createExpense() {
+        CreateExpenseDto createExpenseDto = new CreateExpenseDto("New Expense", LocalDate.parse("2024-06-14"), 100F);
+        HttpEntity<CreateExpenseDto> request = new HttpEntity<>(createExpenseDto, headers);
+        ResponseEntity<Void> response = restTemplate.exchange(endpointUrl, HttpMethod.POST, request, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+
+        // Verify that the new expense is added
+        HttpEntity requestGet = new HttpEntity<>(headers);
+        ResponseEntity<List> responseGet = restTemplate.exchange(endpointUrl, HttpMethod.GET, requestGet, List.class);
+        List<Expense> expenses = responseGet.getBody();
+        assertThat(expenses.size()).isEqualTo(4);
     }
 }
