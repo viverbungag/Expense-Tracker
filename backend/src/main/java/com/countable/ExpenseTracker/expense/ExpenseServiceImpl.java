@@ -1,5 +1,6 @@
 package com.countable.ExpenseTracker.expense;
 
+import com.countable.ExpenseTracker.expense.dto.CreateExpenseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public Collection<Expense> getAllExpenses() {
         return expenseRepository.findAll();
+    }
+
+    @Override
+    public void createExpense(CreateExpenseDto createExpenseDto) {
+        Expense expense = Expense.from(createExpenseDto);
+        expenseRepository.save(expense);
     }
 }

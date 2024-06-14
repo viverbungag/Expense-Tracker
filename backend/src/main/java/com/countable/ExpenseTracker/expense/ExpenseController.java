@@ -1,9 +1,9 @@
 package com.countable.ExpenseTracker.expense;
 
+import com.countable.ExpenseTracker.expense.dto.CreateExpenseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -17,5 +17,11 @@ public class ExpenseController {
     @GetMapping
     public Collection<Expense> getAllExpenses(){
         return expenseService.getAllExpenses();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createExpense(@RequestBody CreateExpenseDto createExpenseDto){
+        expenseService.createExpense(createExpenseDto);
     }
 }
