@@ -9,10 +9,10 @@ import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Expense Tracker',
-  description: 'An expense tracker built with Next.js and TypeScript',
-};
+// export const metadata: Metadata = {
+//   title: 'Expense Tracker',
+//   description: 'An expense tracker built with Next.js and TypeScript',
+// };
 
 export default function RootLayout({
   children,
@@ -21,12 +21,17 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Head>
+      <head>
+        <title>Expense Tracker</title>
+        <meta
+          name="description"
+          content="An expense tracker built with Next.js and TypeScript"
+        />
         <meta
           http-equiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
-      </Head>
+      </head>
       <html lang="en">
         <Providers>
           <body className={`${inter.className} h-full`}>
