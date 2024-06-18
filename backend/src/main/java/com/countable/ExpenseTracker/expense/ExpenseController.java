@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("api/v1/expenses")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequiredArgsConstructor
 public class ExpenseController {
 
