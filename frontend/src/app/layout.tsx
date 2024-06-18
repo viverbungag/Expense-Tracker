@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Expense Tracker',
   description: 'An expense tracker built with Next.js and TypeScript',
+  httpEquiv: {},
 };
 
 export default function RootLayout({
