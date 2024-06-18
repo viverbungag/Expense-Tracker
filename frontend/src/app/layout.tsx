@@ -5,6 +5,7 @@ import Providers from './Providers';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,26 +20,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Providers>
-        <body className={`${inter.className} h-full`}>
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
-          <ToastContainer
-            position="bottom-right"
-            autoClose={2000}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss={false}
-            draggable
-            pauseOnHover
-            theme="dark"
-            transition={Slide}
-          />
-        </body>
-      </Providers>
-    </html>
+    <>
+      <Head>
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </Head>
+      <html lang="en">
+        <Providers>
+          <body className={`${inter.className} h-full`}>
+            {children}
+            <ReactQueryDevtools initialIsOpen={false} />
+            <ToastContainer
+              position="bottom-right"
+              autoClose={2000}
+              hideProgressBar
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss={false}
+              draggable
+              pauseOnHover
+              theme="dark"
+              transition={Slide}
+            />
+          </body>
+        </Providers>
+      </html>
+    </>
   );
 }

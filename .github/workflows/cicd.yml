@@ -38,7 +38,7 @@ jobs:
         run: docker rm -f countable-backend
       - name: Run Docker Container
         run: >
-          docker run --name countable-backend -p 443:8080
+          docker run --name countable-backend -p 8080:8080
           -e SPRING_DATASOURCE_URL=jdbc:postgresql://countable-postgres.cp82woymk3s7.ap-southeast-1.rds.amazonaws.com:5432/countabledb
           -e SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
           -e SPRING_DATASOURCE_USERNAME=postgres
